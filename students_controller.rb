@@ -2,15 +2,21 @@ require('sinatra')
 require('sinatra/contrib/all')
 require_relative('models/student')
 require_relative('models/house')
-require('pry')
 also_reload('./models/*')
 
-# index
 
+get "/" do
+  erb(:home)
+end
+
+
+# index
 get "/students" do
   @students = Student.all()
   erb(:students)
 end
+
+
 # new
 get "/students/new" do
   erb(:new)
@@ -31,20 +37,25 @@ end
 
 
 # edit
-
 get "/students/:id/edit" do
   @student = Student.find(params[:id])
   erb(:edit)
 end
 
+
+# update
 post "/students/:id" do
   @student = Student.new(params)
   @student.update
   redirect to "/students"
 end
 
-# show
-
-# update
 
 # destroy
+
+post "/students/:id/delete" do
+
+  @student = Student.find(params[:id])
+  @student.delete()
+  redirect to "/"
+end

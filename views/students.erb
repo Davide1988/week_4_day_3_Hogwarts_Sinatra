@@ -4,6 +4,8 @@
 <p>Name: <%= student.format_name%></p>
 <a href="./students/<%= student.id%>">Details</a>
 <a href="./students/<%= student.id%>/edit">Edit</a>
-
+<form method="post" action="/students/<%= student.id %>/delete">
+  <input type="submit" value="Delete student"/>
+</form>
 
 <% end %>
